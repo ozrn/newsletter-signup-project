@@ -12,6 +12,7 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/signup.html");
 })
 
+<<<<<<< HEAD
 mailchimp.setConfig({
 
   apiKey: "ae1c785c3494102f26b92c1d51466803-us13",
@@ -20,10 +21,13 @@ mailchimp.setConfig({
 
 });
 
+=======
+>>>>>>> 114410d189aad3cd09ba3c4a5a827ff804240edb
 app.post("/", (req,res) => {
   const firstName = req.body.fName;
   const lastName = req.body.lName;
   const email = req.body.email;
+<<<<<<< HEAD
   const listId = "fbb15baff9";
 
   const subscribingUser = {
@@ -35,6 +39,9 @@ app.post("/", (req,res) => {
     email: email;
 
   };
+=======
+  console.log(firstName,lastName,email);
+>>>>>>> 114410d189aad3cd09ba3c4a5a827ff804240edb
 })
 
 app.listen(8000,() =>{
