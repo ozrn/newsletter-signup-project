@@ -12,7 +12,6 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/signup.html");
 })
 
-<<<<<<< HEAD
 mailchimp.setConfig({
 
   apiKey: "ae1c785c3494102f26b92c1d51466803-us13",
@@ -21,13 +20,10 @@ mailchimp.setConfig({
 
 });
 
-=======
->>>>>>> 114410d189aad3cd09ba3c4a5a827ff804240edb
 app.post("/", (req,res) => {
   const firstName = req.body.fName;
   const lastName = req.body.lName;
   const email = req.body.email;
-<<<<<<< HEAD
   const listId = "fbb15baff9";
 
   const subscribingUser = {
@@ -36,13 +32,45 @@ app.post("/", (req,res) => {
 
     lastName: lastName,
 
-    email: email;
+    email: email,
 
   };
-=======
-  console.log(firstName,lastName,email);
->>>>>>> 114410d189aad3cd09ba3c4a5a827ff804240edb
-})
+  async function run() {
+
+    const response = await mailchimp.lists.addListMember(listId, {
+
+      email_address: subscribingUser.email,
+
+      status: "subscribed",
+
+      merge_fields: {
+
+        FNAME: subscribingUser.firstName,
+
+        LNAME: subscribingUser.lastName,
+
+      }
+
+    });
+
+    res.sendFile(__dirname + "/success.html")
+
+    console.log(
+
+      `Successfully added contact as an audience member. The contact's id is ${
+
+   response.id }.`);
+
+}
+
+run().catch(e => res.sendFile(__dirname + "/failure.html"));
+
+});
+
+
+
+
+
 
 app.listen(8000,() =>{
   console.log("Server is running on 8000");
